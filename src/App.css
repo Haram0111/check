@@ -13,6 +13,37 @@
   }
 }
 
+@font-face {
+  font-family: 'Nanum Pen Script', cursive;;
+  src: url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+}
+.logo{
+  height: 80px;
+  margin: auto;
+}
+.Card{
+  border-radius: 50px;
+}
+.ques_card{
+  width: 100%;
+  box-shadow: 4px 5px 5px rgb(202, 197, 197);
+  margin-bottom: 50px;
+}
+.광고{
+  margin: 0 0 auto 0;
+}
+.questionbox{
+  background-color: #b6a9e4;
+  width: 80%;
+  margin: auto auto 12px auto;
+  padding-bottom: 2px;
+}
+.navmenu{
+  margin-left: 30px;
+}
+.mainpage{
+  background-color: #fff;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -23,9 +54,35 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.justify-content-end {
+  margin: 12px 0 12px 0;
+}
+
+.justify-content-end Text {
+  text-decoration: none;
+  color: black;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.justify-content-end Text:hover {
+  color: rgba(255,255,255,0.7);
+}
+
+.justify-content-end Text:last-child a {
+  background: rgba(255,255,255,0.3);
+  border-radius: 2px;
+  transition: 200ms ease-in-out;
+  padding: 8px 16px 7px;
+}
+
+.nav li:last-child a:hover {
+  background: rgba(255,255,255,0.5);
+  color: #fff;
+}
 
 .App-link {
-  color: #61dafb;
+  color: #fff;
 }
 
 @keyframes App-logo-spin {
