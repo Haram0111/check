@@ -1,16 +1,26 @@
-import React, {useState} from 'react'
+import axios from 'axios';
+import React, {useState, useEffect} from 'react'
 import { Container, Row, Col, Form, InputGroup,FormControl,Button,Table,ButtonGroup} from 'react-bootstrap';
 import {Route} from 'react-router-dom'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import Data from './Data.js'
 
 function Question_table(){
 
-    let [question,question변경] = useState(Data);
+    let [question,setQuestion] = useState([]);
+
+    useEffect(() => {
+      axios
+        .get("https://32cc594d-0939-47b2-b73e-f795c96a8f88.mock.pstmn.io/posts")
+        .then((result) => {
+          setQuestion(result.data);
+        })
+        .catch(() => {});
+    }, []);
 
     return(
         <Container>
-          <div><h1>Q / U / E / S / T / I / O / N</h1></div>
+          {/* 문제 계시판 */}
+          <div><h1>Q / U / E / S / T / I / O / N</h1></div> 
           <hr style={ {color: "#0E4786", height: "5px", width: "68%", margin: "15px auto 0"} }></hr>
           <br></br>
           <Row>
@@ -47,9 +57,8 @@ function Question_table(){
                 <th>제목</th>
                 <th>학년</th>
                 <th>선생님</th>
-                <th>날짜</th>
+                <th>작성일</th>
                 <th>조회수</th>
-                <th>좋아요</th>
               </tr>
             </thead>
             <tbody>
@@ -81,11 +90,10 @@ function Question(props){
       <td>{props.question.title}
       <Button variant="outline-success" size="sm" onClick={()=>{history.push('/question_table/' + props.question.id)}} style={ {marginLeft: "10px", height: "30px", borderRadius: "7px"} }>문제보기</Button>{'  '}
       <Button variant="outline-success" size="sm" onClick={()=>{history.push('/question_table/answer/' + props.question.id)}} style={ {marginLeft: "10px", height: "30px",borderRadius: "7px"} }>정답체크하기</Button> </td>
-      <td>{props.question.grade}</td>
-      <td>{props.question.teacher}</td>
-      <td>{props.question.date}</td>
-      <td>{props.question.views}</td>
-      <td>{props.question.likes}</td>
+      <td>{props.question.content}</td>
+      <td>{props.question.writter}</td>
+      <td>{props.question.createdDate}</td>
+      <td>{props.question.view}</td>
     </tr>
   )
 }

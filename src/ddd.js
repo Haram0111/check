@@ -9,7 +9,7 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 // Worker
 import { Worker } from '@react-pdf-viewer/core'; // install this library
 
-export const QuestionView = () => {
+export const App = () => {
 
   // Create new plugin instance
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
@@ -59,9 +59,7 @@ export const QuestionView = () => {
     <div className='container'>
 
     <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
+    
       <form className='form-group' onSubmit={handlePdfFileSubmit}>
         <input type="file" className='form-control'
           required onChange={handlePdfFileChange}
@@ -76,7 +74,7 @@ export const QuestionView = () => {
       <h4>View PDF</h4>
       <div className='pdf-container'>
         {/* show pdf conditionally (if we have one)  */}
-        {viewPdf&&<><Worker workerUrl="https://unpkg.com/pdfjs-dist@2.13.216/build/pdf.worker.min.js">
+        {viewPdf&&<><Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
           <Viewer fileUrl={viewPdf}
             plugins={[defaultLayoutPluginInstance]} />
       </Worker></>}
@@ -84,13 +82,9 @@ export const QuestionView = () => {
       {/* if we dont have pdf or viewPdf state is null */}
       {!viewPdf&&<>No pdf file selected</>}
       </div>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+
     </div>
   )
 }
 
-export default QuestionView
+export default App

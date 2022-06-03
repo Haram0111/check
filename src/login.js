@@ -1,29 +1,61 @@
+import axios from "axios";
 import React, {useState} from 'react'
 import { Container, Row, Col, Form, Button,Card} from 'react-bootstrap';
 import {Route} from 'react-router-dom'
 import 스터디게임1 from './img/스터디게임1.png'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faGoogle} from '@fortawesome/free-brands-svg-icons'
+import './App.css'
+
 function Login(){
+
+    const [id, setId] = useState("");
+    const [pwd, setPwd] = useState("");
+    const url = 'https://acec155a-5e40-45fd-898c-7ee7bb7d697e.mock.pstmn.io';
+
+    const checkPost = async (props) => {
+      try {
+        const response = await axios.post(
+          "https://acec155a-5e40-45fd-898c-7ee7bb7d697e.mock.pstmn.io",
+          {
+            ID: id,
+            PWD: pwd,
+          }
+        );
+        console.log(response.data);
+
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     return(
         <Container>
           <div><h1>L / O / G / I / N</h1></div>
-          {/* 광고하나 넣어주고 */}
-          <hr style={ {color: "#0E4786", height: "5px", width: "90%", margin: "15px auto 0"} }></hr>
+          <hr style={ {color: "#0E4786", height: "5px", width: "68%", margin: "15px auto 0"} }></hr>
           <br></br>
           <br></br>
           <Row>
             <Col>
               <br></br>
               <Form style={ {width: "60%", margin: "auto"} }>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label><h3>회원 로그인</h3></Form.Label>
-                  <Form.Control type="email" placeholder="아이디를 입력해주세요" style={ {height: "50px", marginTop: "10px"} } />
-                </Form.Group>
+                <h3>회원 로그인</h3>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                  <Form.Control type="password" placeholder="비밀번호를 입력해주세요" style={ {height: "50px"} }/>
+                  <input type="email" placeholder="아이디를 입력해주세요" onChange={(e)=>(setId(e.target))} style={ {height: "50px", width: "100%", marginTop: "10px", borderRadius: "10px", borderColor: "#0000FF"} } />
+                  <input type="password" placeholder="비밀번호를 입력해주세요" onChange={(e)=>(setPwd(e.target))} style={ {height: "50px", width: "100%", marginTop: "10px",  borderRadius: "10px",  borderColor: "#0000FF"} }/>
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                  로그인
-                </Button>
+                <Form.Group className='parent'>
+                  <Button className='child' variant="success" type="submit">
+                    NAVER
+                  </Button>
+                  <Button className='child' variant="danger" type="submit">
+                    <FontAwesomeIcon icon={faGoogle} />
+                  </Button>
+                  <Button className='child2' variant="primary" type="submit" onClick={()=>{console.log("asdf")}}>
+                    로그인
+                  </Button>
+                </Form.Group>
+                <Button className='member' variant="white" type="submit">회원가입</Button>          
               </Form>
               <img src={스터디게임1} alt='스터디게임1' style={ {marginTop: "10px", width: "410px"} }></img>
             </Col>
@@ -58,7 +90,6 @@ function Login(){
           </Row>
           <br></br>
         </Container>
-        
     )
 }
 

@@ -3,11 +3,10 @@ import { Container, Row, Col, Form, InputGroup,FormControl,Button,Table,ButtonGr
 import { connect } from 'react-redux';
 import {Route} from 'react-router-dom'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import Data from './Data.js'
 
 function Check(props){
 
-    let [question,question변경] = useState(Data);
+    let [question,question변경] = useState([]);
 
     return(
         <Container>
@@ -44,6 +43,7 @@ function Check(props){
           <Table striped bordered hover variant="white" style={ { marginTop: "-6px",boxShadow: "3px 3px 0px rgb(202, 197, 197)" } }>
             <thead>
               <tr>
+                <th>순서</th>
                 <th>제목</th>
                 <th>학년</th>
                 <th>선생님</th>
@@ -75,7 +75,8 @@ function Question(props){
 
   return(
     <tr>
-      <td onClick={()=>{history.push('/Check/' + props.question.num)}}>{props.question.title}</td>
+      <td>{props.question.id}</td>
+      <td>{props.question.title}</td>
       <td>{props.question.grade}</td>
       <td>{props.question.teacher}</td>
       <td>{props.question.date}</td>

@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Navbar,Nav,Container,Row,Col,Card,Button,Alert,Form,Table,ButtonGroup,InputGroup,FormControl} from 'react-bootstrap';
 import logo from './logo.svg';
 import {Route, Link} from 'react-router-dom'
+import axios from 'axios';
 import './App.css';
 import 세림학원 from './img/세림학원.PNG'
 import 세로사진 from './img/스터디게임.png'
@@ -11,13 +12,17 @@ import Question_table from './Question_table'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPhoneAlt, faBackward} from '@fortawesome/free-solid-svg-icons'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import Q_A from './Q_A'
-import Question from './Question_table1'
+import QA from './QA'
+import QADetailComment from './QADetailComment'
+import QuestionDetail from './QuestionTableDetail'
 import Uploadquestion from './uploadquestion'
 import Check from './Check.js'
 import Mate from './Mate'
-import QuestionView from './QuestionView';
-import Mate1 from './Mate1'
+import QuestionView from './QuestionView'
+import Membership from './membership'
+import Users from './Users'
+import Reportcard from './Reportcard'
+
 function App() {
 
   let history = useHistory();
@@ -28,7 +33,8 @@ function App() {
         <Container style={{height: "50px", padding: "8px" }}>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text className='navmenu text-body'><Link to='/CreateList'> 제휴와 협력</Link> </Navbar.Text>
+            <Navbar.Text className='navmenu text-body'><Link to='/login'> 제휴와 협력</Link> </Navbar.Text>
+            <Navbar.Text className='navmenu text-body'><Link to='/Membership'>회원가입</Link>  </Navbar.Text>
             <Navbar.Text className='navmenu text-body'><Link to='/login'>Sign in</Link>  </Navbar.Text>
           </Navbar.Collapse>
         </Container>
@@ -60,7 +66,7 @@ function App() {
         </Container>
       </Nav>
       <br></br>
-
+      
       <Route exact path='/'>
         <Container className='mainpage'>
           <Row>
@@ -86,38 +92,49 @@ function App() {
             </Col>
           </Row>
         </Container>
+        <br></br>
+        <br></br>
       </Route>
 
       <Route path='/login'>
         <Login/>
       </Route>
 
+      <Route path='/Users'>
+        <Users/>
+      </Route>
+
+      <Route path='/Membership'>
+        <Membership/>
+      </Route>
+
       <Route exact path='/Check'>
         <Check/>
       </Route>
-
-      <Route exact path='/Check/:id'>
-        <Check/>
+      
+      <Route exact path='/Reportcard'>
+        <Reportcard/>
       </Route>
 
       <Route exact path='/Q_A'>
-        <Q_A/>
+        <QA/>
+      </Route>
+
+      <Route exact path='/Q_A/detail/:id'>
+        <QA/>
+        <QADetailComment/>
       </Route>
 
       <Route exact path='/Mate'>
         <Mate/>
       </Route>
 
-      <Route exact path='/QuestionView'>
-        <QuestionView/>
-      </Route>
-
-      <Route exact path='/Mate/:id'>
+      {/* <Route exact path='/Mate/:id'>
         <Row>
           <Col sm={8}><Mate/></Col>
-          <Question></Question>
+          <QuestionDetail></QuestionDetail>
         </Row>
-      </Route>
+      </Route> */}
 
       <Route exact path='/Q_A/upload'>
         <Container>
@@ -156,8 +173,12 @@ function App() {
       <Route exact path='/question_table/:id'>
         <Row>
           <Col sm={8}><Question_table/></Col>
-          <Question></Question>
+          <QuestionDetail></QuestionDetail>
         </Row>
+      </Route>
+      
+      <Route exact path='/question_table/:id/viewer'>
+        <QuestionView/>
       </Route>
       
       <Route exact path='/uploadquestion'>
@@ -196,36 +217,6 @@ function App() {
     </div>
   )
 }
-
-// function Ch_Nav(props){
-//   let history = useHistory();
-
-//   return(
-//     <Nav activeKey="/home"
-//       onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}>
-//       <Container fluid="md">
-//       <br></br>
-//       <Nav justify variant="tabs" defaultActiveKey="/" >
-//         <Nav.Item className='navitem'>
-//           <Nav.Link onClick={()=>{history.push('/question_table')}} style={{color:"white"}}> 문제게시판 </Nav.Link>
-//         </Nav.Item>
-//         <Nav.Item>
-//           <Nav.Link onClick={()=>{ 누른탭변경(1) }} style={{color:"black"}}>문의사항</Nav.Link>
-//         </Nav.Item>
-//         <Nav.Item>
-//           <Nav.Link onClick={()=>{history.push('/Mate')}} style={{color:"black"}}>My mate 확인하기</Nav.Link>
-//         </Nav.Item>
-//         <Nav.Item>
-//           <Nav.Link onClick={()=>{history.push('/Check')}} style={{color:"black"}}>성적표확인</Nav.Link>
-//         </Nav.Item>
-//         <Nav.Item>
-//           <Nav.Link onClick={()=>{history.push('/uploadquestion')}} style={{color:"black"}}>문제등록</Nav.Link>
-//         </Nav.Item>
-//       </Nav>
-//       </Container>
-//     </Nav>
-//   );
-// }
 
 function 문제box2(){
   return(
